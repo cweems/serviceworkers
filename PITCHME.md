@@ -15,43 +15,43 @@ If you're building for underserved populations, you can't assume stable access t
 ---
 ## How We Build at CfA
 
-* Simple web apps: mostly HTML and CSS (as little JS as possible).
-* Keep files as small as possible.
-* Mobile-responsive design emphasis.
-* Support for legacy browsers (IE9/10).
+- Simple web apps: mostly HTML and CSS (as little JS as possible). |
+- Keep files as small as possible. |
+- Mobile-responsive design emphasis. |
+- Support for legacy browsers (IE9/10). |
 ---
 ### We optimize for a low-quality but consistent connection on a legacy device.
 That's not necessarily an accurate depiction of our users.
 ---
 ## A More Realistic Perspective
 
-* Operating on a decent Android device with a modern browser.
-* OK quality internet, but with inconsistent access.
-* Load times and data use matter, but we're not rationing kilobytes.
+- Operating on a decent Android device with a modern browser. |
+- OK quality internet, but with inconsistent access. |
+- Load times and data use matter, but we're not rationing kilobytes. |
 ---
 # Examples Where a Service Worker Could Help
 ---
-* A GetCalFresh applicant has a smartphone, but no data plan. They start their application on the wifi network at their public library, but need to leave before they can finish.
+- A GetCalFresh applicant has a smartphone, but no data plan. They start their application on the wifi network at their public library, but need to leave before they can finish. |
 
-* A service worker + a single page app could display the additional questions, store responses, and sync data when a connection becomes available.
+- A service worker + a single page app could display the additional questions, store responses, and sync data when a connection becomes available. |
 ---
-* A ClientComm Parole Officer conducts house visits in areas that have unreliable cell service. They still need to send a reminder about a court appointment to one of their clients.
+- A ClientComm Parole Officer conducts house visits in areas that have unreliable cell service. They still need to send a reminder about a court appointment to one of their clients. |
 
-* A service worker could store their message and post it when they return to an area with cell service.
+- A service worker could store their message and post it when they return to an area with cell service. |
 ---
-* A Clear My Record assister works in an office where the internet frequently goes down for 1-2 hours while their overburdened IT team fixes things. The assister still needs access to their dashboard so that they can view basic information.
+- A Clear My Record assister works in an office where the internet frequently goes down for 1-2 hours while their overburdened IT team fixes things. The assister still needs access to their dashboard so that they can view basic information. |
 
-* A service worker could cache recently viewed pages and serve them back while the internet is offline.
+- A service worker could cache recently viewed pages and serve them back while the internet is offline. |
 ---
 ## CanIUse Service Workers?
-* Globally, 74% of browsers support service workers.
-* Supported on Chrome, Firefox, and Opera.
-* Not supported on IE, Edge, or Safari (but they're working on it)
+- Globally, 74% of browsers support service workers. |
+- Supported on Chrome, Firefox, and Opera. |
+- Not supported on IE, Edge, or Safari (but they're working on it) |
 ---
 ## Disclaimers
-* Requires SSL.
-* You can't really count on storage size or storage being persisted.
-* Things can get confusing really fast if you're not intentional about your caching strategy.
+- Requires SSL. |
+- You can't really count on storage size or storage being persisted. |
+- Things can get confusing really fast if you're not intentional about your caching strategy. |
 ---
 # [Demo](https://offline-news-service-worker.herokuapp.com/)
 ---
