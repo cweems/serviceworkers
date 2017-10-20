@@ -48,7 +48,12 @@ That's not necessarily an accurate depiction of our users.
 * Supported on Chrome, Firefox, and Opera.
 * Not supported on IE, Edge, or Safari (but they're working on it)
 ---
-## Registering a Service Worker
+## Disclaimers
+* Requires SSL.
+* You can't count on storage being persisted.
+* Things can get confusing really fast if you're not intentional about your caching strategy.
+---
+### Registering a Service Worker
 
 ```javascript
 if ('serviceWorker' in navigator) {
@@ -69,3 +74,7 @@ if ('serviceWorker' in navigator) {
 @[1](Check that our browser supports service workers)
 @[4-10](Console.log the service worker's registration state for demo purposes)
 @[12-15](Logging out an error if the service worker failed to install)
+---
+### Image test
+![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+
