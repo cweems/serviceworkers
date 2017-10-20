@@ -63,8 +63,9 @@ if ('serviceWorker' in navigator) {
     }
 
   }).catch(function(error) {
-    // registration failed
     console.log('Registration failed with ' + error);
   });
 }```
 @[1](Check that our browser supports service workers)
+@[4-10](Console.log the service worker's registration state for demo purposes)
+@[12-15](Logging out an error if the service worker failed to install)
