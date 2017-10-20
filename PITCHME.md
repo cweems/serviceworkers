@@ -56,6 +56,7 @@ That's not necessarily an accurate depiction of our users.
 ### Registering a Service Worker
 
 ```javascript
+// application.js
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(function(reg) {
 
@@ -71,10 +72,30 @@ if ('serviceWorker' in navigator) {
     console.log('Registration failed with ' + error);
   });
 }```
-@[1](Check that our browser supports service workers)
-@[4-10](Console.log the service worker's registration state for demo purposes)
-@[12-15](Logging out an error if the service worker failed to install)
+@[2](Check that our browser supports service workers)
+@[5-11](Console.log the service worker's registration state for demo purposes)
+@[13-16](Logging out an error if the service worker failed to install)
 ---
 ### Caching On Install
 ![Cache on Install](https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/images/cm-on-install-dep.png)
-
+---
+```javascript
+// sw.js
+self.addEventListener('install', function(event) {
+  event.waitUntil(
+    caches.open('mysite-static-v1').then(function(cache) {
+      return cache.addAll([
+        '/css/whatever-v3.css',
+        '/css/imgs/sprites-v6.png',
+        '/css/fonts/whatever-v8.woff',
+        '/js/all-min-v4.js'
+        // etc
+      ]);
+    })
+  );
+});
+```
+@[2](Listen for install lifecycle event)
+@[3](Tell our event to wait until the cache is populated)
+@[4](Open a cache called myste-static-v1)
+@[5-11](Load static assets into the cache)
