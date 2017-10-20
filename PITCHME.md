@@ -31,7 +31,6 @@ That's not necessarily an accurate depiction of our users.
 ---
 # Examples Where a Service Worker Could Help
 ---
-![getcalfresh]()
 * A GetCalFresh applicant has a smartphone, but no data plan. They start their application on the wifi network at their public library, but need to leave before they can finish.
 
 * A service worker + a single page app could display the additional questions, store responses, and sync data when a connection becomes available.
@@ -53,6 +52,8 @@ That's not necessarily an accurate depiction of our users.
 * Requires SSL.
 * You can't count on storage being persisted.
 * Things can get confusing really fast if you're not intentional about your caching strategy.
+---
+# [Demo](https://offline-news-service-worker.herokuapp.com/)
 ---
 ### Service Worker Lifecycle
 ![lifecycle](https://bitsofco.de/content/images/2016/07/Lifecycle-3.png)
@@ -200,7 +201,7 @@ caches.match('/data.json').then(function(response) {
   return networkUpdate;
 }).catch(showErrorMessage).then(stopSpinner);
 ```
-@[1](Let's track whether or not we've received a network response)
+@[2](Let's track whether or not we've received a network response)
 @[4](Show a loading spinner/status to the user)
 @[6-11](This is our network request)
 @[7](If it's successful, it will return json)
@@ -211,6 +212,22 @@ caches.match('/data.json').then(function(response) {
 @[20-21](We couldn't find an entry in our cache, so we'll just return netWorkUpdate)
 @[22](If network update fails, we show an error message to the user)
 ---
-
-
-
+```javascript
+// sw.js
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.open('dynamic-content').then(function(cache) {
+      return fetch(event.request).then(function(response) {
+        cache.put(event.request, response.clone());
+        return response;
+      });
+    })
+  );
+});
+```
+@[2-3](Again, listen for fetch events)
+@[4](Cache for dynamic content)
+@[5-8](Update cache with new content)
+---
+### [Background Sync Demo](https://jakearchibald-gcm.appspot.com/)
+---
