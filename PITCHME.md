@@ -75,6 +75,6 @@ if ('serviceWorker' in navigator) {
 @[4-10](Console.log the service worker's registration state for demo purposes)
 @[12-15](Logging out an error if the service worker failed to install)
 ---
-### Image test
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+### Caching On Install
+![Cache on Install](https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/images/cm-on-install-dep.png)
 
