@@ -47,3 +47,24 @@ That's not necessarily an accurate depiction of our users.
 * Globally, 74% of browsers support service workers.
 * Supported on Chrome, Firefox, and Opera.
 * Not supported on IE, Edge, or Safari (but they're working on it)
+---
+## Registering a Service Worker
+
+```javascript
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(function(reg) {
+
+    if(reg.installing) {
+      console.log('Service worker installing');
+    } else if(reg.waiting) {
+      console.log('Service worker installed');
+    } else if(reg.active) {
+      console.log('Service worker active');
+    }
+
+  }).catch(function(error) {
+    // registration failed
+    console.log('Registration failed with ' + error);
+  });
+}```
+@[1](Check that our browser supports service workers)
