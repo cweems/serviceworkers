@@ -242,15 +242,19 @@ navigator.serviceWorker.ready.then(function(registration) {
   });
 });
 ```
+@[3](Register the sync event on serviceworker creation)
 ---
 ### Handling the sync with a serviceworker
-```
+```javascript
+// sw.js
 self.addEventListener('sync', function(event) {
   if (event.tag == 'send-message') {
     event.waitUntil(sendEverythingInTheOutbox());
   }
 });
 ```
+@[2](Add serviceworker event listener)
+@[3-5](Sync will retry with an exponential fallback until success)
 ---
 ### Questions
 ---
