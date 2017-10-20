@@ -53,6 +53,10 @@ That's not necessarily an accurate depiction of our users.
 * You can't count on storage being persisted.
 * Things can get confusing really fast if you're not intentional about your caching strategy.
 ---
+### Service Worker Lifecycle
+![lifecycle](https://bitsofco.de/content/images/2016/07/Lifecycle-3.png)
+Source: bitsofco.de
+---
 ### Registering a Service Worker
 
 ```javascript
