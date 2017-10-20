@@ -55,6 +55,7 @@ That's not necessarily an accurate depiction of our users.
 ---
 ### Service Worker Lifecycle
 ![lifecycle](https://bitsofco.de/content/images/2016/07/Lifecycle-3.png)
+<br>
 Source: bitsofco.de
 ---
 ### Registering a Service Worker
