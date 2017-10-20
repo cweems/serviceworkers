@@ -34,3 +34,16 @@ That's not necessarily an accurate depiction of our users.
 * A GetCalFresh applicant has a smartphone, but no data plan. They start their application on the wifi network at their public library, but need to leave before they can finish.
 
 * A service worker + a single page app could display the additional questions, store responses, and sync data when a connection becomes available.
+---
+* A ClientComm Parole Officer conducts house visits in areas that have unreliable cell service. They still need to send a reminder about a court appointment to one of their clients.
+
+* A service worker could store their message and post it when they return to an area with cell service.
+---
+* A Clear My Record assister works in an office where the internet frequently goes down for 1-2 hours while their overburdened IT team fixes things. The assister still needs access to their dashboard so that they can view basic information.
+
+* A service worker could cache recently viewed pages and serve them back while the internet is offline.
+---
+## CanIUse Service Workers?
+* Globally, 74% of browsers support service workers.
+* Supported on Chrome, Firefox, and Opera.
+* Not supported on IE, Edge, or Safari (but they're working on it)
