@@ -31,6 +31,7 @@ That's not necessarily an accurate depiction of our users.
 ---
 # Examples Where a Service Worker Could Help
 ---
+![getcalfresh]()
 * A GetCalFresh applicant has a smartphone, but no data plan. They start their application on the wifi network at their public library, but need to leave before they can finish.
 
 * A service worker + a single page app could display the additional questions, store responses, and sync data when a connection becomes available.
@@ -82,6 +83,21 @@ if ('serviceWorker' in navigator) {
 @[13-16](Logging out an error if the service worker failed to install)
 
 ---
+### Registering Immediately
+
+```javascript
+// sw.js
+self.addEventListener('install', event => {
+  self.skipWaiting();
+
+  event.waitUntil(
+    // caching etc
+  );
+});
+```
+@[3](Tell the service worker to skip the waiting phase and activate immediately)
+---
+
 ### Caching On Install
 ![Cache on Install](https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/images/cm-on-install-dep.png)
 ---
@@ -108,6 +124,30 @@ self.addEventListener('install', function(event) {
 @[5-11](Load static assets into the cache)
 
 ---
+### Common Caching Stategies
+---
+### Cache falling back to network
+![Falling back to network](https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/images/ss-falling-back-to-network.png)
+---
+### Cache falling back to network
+
+```javascript
+// sw.js
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request).then(function(response) {
+      return response || fetch(event.request);
+    })
+  );
+});
+```
+@[2](On a fetch event)
+@[4](Check our caches to see if they match the request)
+@[5](Return from the cache if we have something, otherwise initiate the network request)
+---
+### Cache falling back to network
+* What types of resources would you want to serve with this strategy?
+---
 ### Network falling back to cache
 ![Falling back to cache](https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/images/ss-network-falling-back-to-cache.png)
 ---
@@ -127,10 +167,50 @@ self.addEventListener('fetch', function(event) {
 @[5](Catch returns our caches that match the fetch event's requests)
 
 ---
+### Network falling back to cache
+* What's a good use-case for going to the network first?
 * There's an issue with this approach
 * It has to do with when our event respondWith throws a catch
 ---
 ### Better: Cache, then network
 ![Cache then network](https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/images/ss-cache-then-network.png)
 ---
+### Cache, then network
+```javascript
+// application.js
+var networkDataReceived = false;
+
+loadingSpinner();
+
+var networkUpdate = fetch('/data.json').then(function(response) {
+  return response.json();
+}).then(function(data) {
+  networkDataReceived = true;
+  updatePage();
+});
+
+caches.match('/data.json').then(function(response) {
+  if (!response) throw Error("No data");
+  return response.json();
+}).then(function(data) {
+  if (!networkDataReceived) {
+    updatePage(data);
+  }
+}).catch(function() {
+  return networkUpdate;
+}).catch(showErrorMessage).then(stopSpinner);
+```
+@[1](Let's track whether or not we've received a network response)
+@[4](Show a loading spinner/status to the user)
+@[6-11](This is our network request)
+@[7](If it's successful, it will return json)
+@[8-11](On success, it updates our status variable, and then triggers something to update the page)
+@[13-24](While our network request is running, get data from our cache)
+@[14-15](Check to make sure we recieced a response from the cache)
+@[17-19](Check that the network request hasn't already udpated our data)
+@[20-21](We couldn't find an entry in our cache, so we'll just return netWorkUpdate)
+@[22](If network update fails, we show an error message to the user)
+---
+
+
 
