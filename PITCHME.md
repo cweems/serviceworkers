@@ -20,7 +20,7 @@ If you're building for underserved populations, you can't assume stable access t
 * Mobile-responsive design emphasis.
 * Support for legacy browsers (IE9/10).
 ---
-## We optimize for a low-quality but consistent connection on a legacy device.
+### We optimize for a low-quality but consistent connection on a legacy device.
 That's not necessarily an accurate depiction of our users.
 ---
 ## A More Realistic Perspective
@@ -29,3 +29,8 @@ That's not necessarily an accurate depiction of our users.
 * OK quality internet, but with inconsistent access.
 * Load times and data use matter, but we're not rationing kilobytes.
 ---
+# Examples Where a Service Worker Could Help
+---
+* A GetCalFresh applicant has a smartphone, but no data plan. They start their application on the wifi network at their public library, but need to leave before they can finish.
+
+* A service worker + a single page app could display the additional questions, store responses, and sync data when a connection becomes available.
