@@ -80,6 +80,7 @@ if ('serviceWorker' in navigator) {
   });
 }```
 @[2](Check that our browser supports service workers)
+@[3](Resgister the service worker with a scope)
 @[5-11](Console.log the service worker's registration state for demo purposes)
 @[13-16](Logging out an error if the service worker failed to install)
 
