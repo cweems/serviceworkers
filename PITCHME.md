@@ -79,8 +79,8 @@ if ('serviceWorker' in navigator) {
 ---
 ### Caching On Install
 ![Cache on Install](https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/images/cm-on-install-dep.png)
-
 ---
+### Network falling back to cache
 ```javascript
 // sw.js
 self.addEventListener('install', function(event) {
@@ -106,7 +106,7 @@ self.addEventListener('install', function(event) {
 ### Network falling back to cache
 ![Falling back to cache](https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/images/ss-network-falling-back-to-cache.png)
 ---
-
+### Network falling back to cache
 ```javascript
 // sw.js
 self.addEventListener('fetch', function(event) {
@@ -120,3 +120,12 @@ self.addEventListener('fetch', function(event) {
 @[2](Listen for network fetch events)
 @[4](If the request fails, we catch)
 @[5](Catch returns our caches that match the fetch event's requests)
+
+---
+* There's an issue with this approach
+* It has to do with when our event respondWith throws a catch
+---
+### Better: Cache, then network
+![Cache then network](https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/images/ss-cache-then-network.png)
+---
+
