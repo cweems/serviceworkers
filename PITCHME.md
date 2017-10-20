@@ -50,7 +50,7 @@ That's not necessarily an accurate depiction of our users.
 ---
 ## Disclaimers
 * Requires SSL.
-* You can't count on storage being persisted.
+* You can't really count on storage size or storage being persisted.
 * Things can get confusing really fast if you're not intentional about your caching strategy.
 ---
 # [Demo](https://offline-news-service-worker.herokuapp.com/)
@@ -230,4 +230,27 @@ self.addEventListener('fetch', function(event) {
 @[5-8](Update cache with new content)
 ---
 ### [Background Sync Demo](https://jakearchibald-gcm.appspot.com/)
+---
+### Registering a Background Sync Event
+```javascript
+// application.js
+navigator.serviceWorker.ready.then(function(registration) {
+  registration.sync.register('send-message').then(function() {
+    // registration succeeded
+  }, function() {
+    // registration failed
+  });
+});
+```
+---
+### Handling the sync with a serviceworker
+```
+self.addEventListener('sync', function(event) {
+  if (event.tag == 'send-message') {
+    event.waitUntil(sendEverythingInTheOutbox());
+  }
+});
+```
+---
+### Questions
 ---
